@@ -9,6 +9,8 @@ Cliquez sur le lien ci-dessous pour faire, dans un dossier public_html/JS/TD7, v
 
 https://classroom.github.com/g/i1KJ5n4v
 
+**Deadline :** Lundi 5 avril 23h00.
+
 ## INTRODUCTION
 
 **Ce TD7 est évalué et fait office de projet JavaScript.**
