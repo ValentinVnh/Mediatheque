@@ -7,9 +7,7 @@
 
 Cliquez sur le lien ci-dessous pour faire, dans un dossier public_html/JS/TD7, votre fork privé du TD7 (**attention, pas de fork à la main !**):
 
-https://classroom.github.com/a/vUQLDYzC
-
-la version [pdf](ressources/td7.pdf)
+https://classroom.github.com/g/i1KJ5n4v
 
 ## INTRODUCTION
 
