@@ -27,7 +27,7 @@ Le principe est d'utiliser la technologie AJAX pour communiquer avec une base de
 
 Vous disposez pour ce TD, d’une architecture de départ pour l’environnement web, avec les fichiers `mediatheque.html` et `styles.css`. Vous pouvez les modifier.
 
-L’interface par défaut de la médiathèque ressemble à cette capture d’écran :
+L’interface par défaut de la médiathèque pourra ressembler à cette capture d’écran une fois que vous aurez chargé les données depuis la BDD :
 
 <p style="text-align:center">
 	<img src="ressources/img1.png">
@@ -46,7 +46,7 @@ L’utilisateur de la médiathèque pourra au minimum :
 
 + enregistrer un nouvel adhérent ;
 + enregistrer un nouveau livre ;
-+ voir à tout moment la liste des adhérents et le nombre de livres qu'ils ont empruntés ;
++ voir à tout moment la liste des adhérents et le nombre de livres qu'ils ont empruntés;
 + voir à tout moment la liste des livres disponibles et celle des livres
   empruntés ;
 + avoir accès, par un clic sur le nom de l’adhérent, à la liste des livres qu’il a en sa possession en ce moment ;
@@ -123,22 +123,20 @@ Il est possible de faire tout le TD en utilisant ces scripts, mais si vous le so
 ## Autres fonctionnalités
 
 En plus du minimum qui est demandé, vous devrez ajouter des fonctionnalités
-supplémentaires à votre application pour obtenir la note maximale. Vous devrez
-par exemple faire des requêtes `GET` et des requêtes `POST`. Quelques autres
+supplémentaires à votre application pour obtenir la note maximale. Quelques autres
 suggestions :
 
-### Suppression
-
-Vous pouvez ajouter des boutons pour supprimer les adhérents et les livres qui ont été enregistrés.
-
-### Utilisation d'une API
-
-Vous pouvez utiliser une API de votre choix pour ajouter une fonctionnalité au
-site. Nous vous suggérons d'utiliser 
-[l'API de *Google Books*](https://developers.google.com/books/docs/v1/using#PerformingSearch) pour
-afficher la couverture d'un livre à partir de son titre.
-
-
-### Utilisation de `fetch()` et `async`/`await`
-
-Vous devrez utiliser les deux syntaxes qui ont été présentées dans le [TD6](https://gitlabinfo.iutmontp.univ-montp2.fr/r4.01-developpementweb/TD6).
+* faire des requêtes `GET` et des requêtes `POST` depuis le JavaScript ;
+* Suppression : Vous pouvez ajouter des boutons pour supprimer les adhérents et
+  les livres qui ont été enregistrés (clic sur le bouton <img alt=""
+  src="src/img/x.svg" style="background-color:lightgrey" /> )
+*  Utilisation d'une API : Vous pouvez utiliser une API de votre choix pour
+   ajouter une fonctionnalité au site. Nous vous suggérons d'utiliser 
+   [l'API de *Google Books*](https://developers.google.com/books/docs/v1/using#PerformingSearch)
+   pour afficher la couverture d'un livre à partir de son titre (clic sur
+   <img alt="" src="src/img/image.svg" style="background-color:lightgrey" />).
+* afficher l'emprunteur d'un livre en cliquant sur 
+  <img alt="" src="src/img/person.svg" style="background-color:lightgrey" />.
+* Utilisation de `fetch()` et `async`/`await` : Vous devrez utiliser les deux
+  syntaxes qui ont été présentées dans le
+  [TD6](https://gitlabinfo.iutmontp.univ-montp2.fr/r4.01-developpementweb/TD6).
