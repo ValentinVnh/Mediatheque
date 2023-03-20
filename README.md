@@ -19,13 +19,13 @@ https://gitlabinfo.iutmontp.univ-montp2.fr/r4.01-developpementweb/etu/votre_logi
 
 Dans ce module, vous aurez deux notes : l'évaluation de ce projet (60%) et l'examen écrit final (40%). 
 
-Vous devez travailler en binôme, ou bien exceptionnellement seul. Le rendu se fera à la fois en poussant votre travail sur le dépôt *GitLab* et en communiquant à votre chargé de TD une adresse accessible de l'extérieur sur laquelle on pourra tester directement dans un navigateur les fonctionnalités implémentées (par exemple le lien vers votre répertoire `public_html`).
+Vous devez travailler en binôme, ou bien exceptionnellement seul. Le rendu se fera à la fois en poussant votre travail sur le dépôt *GitLab* et en communiquant à votre enseignant une adresse accessible de l'extérieur sur laquelle on pourra tester directement dans un navigateur les fonctionnalités implémentées (par exemple le lien vers votre répertoire `public_html`).
 
 Pour ce travail, vous allez devoir programmer le fonctionnement d’une mini médiathèque. Vous aurez à gérer des adhérents, des livres et des emprunts.
 
 Le principe est d'utiliser la technologie AJAX pour communiquer avec une base de données dans les deux sens : l'affichage devra refléter les données dans la BDD et les actions de l'utilisateur pourront modifier le contenu de la BDD.
 
-Vous disposez pour ce TD, d’une architecture de départ pour l’environnement web, avec les fichiers `mediatheque.html` et `styles.css`. Vous pouvez les modifier.
+Vous disposez pour ce projet, d’une architecture de départ pour l’environnement web, avec les fichiers `mediatheque.html` et `styles.css`. Vous pouvez les modifier.
 
 L’interface par défaut de la médiathèque pourra ressembler à cette capture d’écran une fois que vous aurez chargé les données depuis la BDD :
 
@@ -83,7 +83,7 @@ La plupart des outils pour communiquer avec la base de données vous sont fourni
 - Le fichier `mediatheque.sql` vous permettra de créer les tables, et y placer quelques valeurs d'exemple, que vous pourrez modifier comme vous le souhaitez.
 - Le fichier `php/Model/Conf.php` contient la configuration de connexion à la base de données. Vous devez remplir ces informations pour que le script puisse accéder à votre base de données (les commentaires décrivent les informations pour vous connecter à la base de données sur votre compte à l'IUT).
 - Pour chacun des contrôleurs `ControllerAdherent` `ControllerEmprunt`
-  `ControllerLivre`, vous fournissons 3 actions : `readAll()`, `create()` et `delete()`.
+  `ControllerLivre`, nous fournissons 3 actions : `readAll()`, `create()` et `delete()`.
 - Vous pouvez faire les requêtes suivantes : 
   - `ControllerAdherent.php?action=readAll` pour accéder à tous les adhérents au format
     ```json
@@ -106,7 +106,7 @@ La plupart des outils pour communiquer avec la base de données vous sont fourni
   - `ControllerEmprunt.php?action=delete&idLivre=12` pour supprimer l'emprunt du
     livre d'identifiant `12`.
 
-Il est possible de faire tout le TD en utilisant ces scripts, mais si vous le souhaitez **vous pouvez les modifier comme ça vous arrange** (et éventuellement ajouter d'autres scripts).
+Il est possible de faire tout le projet en utilisant ces scripts, mais si vous le souhaitez **vous pouvez les modifier comme ça vous arrange** (et éventuellement ajouter d'autres scripts).
 
 ## Conseils et Consignes
 
