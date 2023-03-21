@@ -35,8 +35,15 @@ function ajouterLivresDisponibles(livres) {
  * @param {Livre} livre
  * @returns Un livre format HTML
  */
-export function creerElementLivre(livre) {
+function creerElementLivre(livre) {
     let nouveauLivre = document.createElement("p");
-    nouveauLivre.innerHTML(livre.titreLivre);
+    nouveauLivre.innerHTML = livre.titreLivre;
     return nouveauLivre;
+}
+
+function emprunter(idAdherent, idLivre) {
+    fetch(`php/Controller/ControllerEmprunt.php?action=create&idAdherent=${idAdherent}&idLivre=${idLivre}`)
+        .then(response => response.json())
+        .then(response => console.log("Livre emprunté. " + response))
+        .catch(error => console.log(error));
 }
