@@ -19,7 +19,7 @@ class ControlleurAdherent
     static function create()
     {
         $adherent = [
-            "nomAdherent" => $_POST["nom"]
+            "nomAdherent" => $_GET["nom"]
         ];
         $id = ModelAdherent::save($adherent);
         echo json_encode($id);
