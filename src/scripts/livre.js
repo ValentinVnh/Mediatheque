@@ -16,7 +16,7 @@ function ajouterUnLivre() {
     fetch(`php/Controller/ControllerLivre.php?action=create&titre=${nouveauLivreTitre.value}`)
         .then(response => response.json())
         .catch(error => console.log(error));
-    listeLivresDisponibles.insertAdjacentElement("beforeend", creerElementLivre(nouveauLivreTitre));
+    //listeLivresDisponibles.insertAdjacentElement("beforeend", creerElementLivre(nouveauLivreTitre));
     nouveauLivreTitre.value = "";
 }
 ajouterLivre.addEventListener("click", ajouterUnLivre);
