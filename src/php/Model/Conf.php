@@ -4,9 +4,9 @@ class Conf {
 
     private static $database = array(
         'hostname' => 'webinfo.iutmontp.univ-montp2.fr',
-        'database' => '...', // à compléter avec vos données personnelles
-        'login'    => '...', // à compléter avec vos données personnelles
-        'password' => '...'  // à compléter avec vos données personnelles
+        'database' => 'vanhovev', // à compléter avec vos données personnelles
+        'login'    => 'vanhovev', // à compléter avec vos données personnelles
+        'password' => 'F0n82NE@Z(2gKqdS'  // à compléter avec vos données personnelles
     );
 
     static public function getLogin() {
