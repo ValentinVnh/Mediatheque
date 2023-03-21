@@ -37,10 +37,15 @@ function ajouterLivresDisponibles(livres) {
  */
 function creerElementLivre(livre) {
     let nouveauLivre = document.createElement("p");
-    nouveauLivre.innerHTML = livre.titreLivre;
+    nouveauLivre.innerText = livre.titreLivre;
     return nouveauLivre;
 }
 
+/**
+ * Emprunte un emprunt dans la base de données à partir d'un livre et d'un adhérent
+ * @param idAdherent l'identifiant de l'adhérent
+ * @param idLivre l'identifiant du livre
+ */
 function emprunter(idAdherent, idLivre) {
     fetch(`php/Controller/ControllerEmprunt.php?action=create&idAdherent=${idAdherent}&idLivre=${idLivre}`)
         .then(response => response.json())
