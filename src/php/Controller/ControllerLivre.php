@@ -16,6 +16,18 @@ class ControlleurLivre
         echo json_encode($livres);
     }
 
+    static function readAllDisponibles()
+    {
+        $livresDisponibles = ModelLivre::selectDisponibles();
+        echo json_encode($livresDisponibles);
+    }
+
+    static function readAllEmpruntes()
+    {
+        $livresEmpruntes = ModelLivre::selectEmpruntes();
+        echo json_encode($livresEmpruntes);
+    }
+
     static function create()
     {
         $livre = [
