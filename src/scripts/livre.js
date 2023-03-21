@@ -1,7 +1,7 @@
 class Livre {
     constructor(idLivre, titreLivre) {
+        this.idLivre = idLivre;
         this.titreLivre = titreLivre;
-        this.idLivre = titreLivre;
     }
 }
 
@@ -16,7 +16,6 @@ function ajouterUnLivre() {
     fetch(`php/Controller/ControllerLivre.php?action=create&titre=${nouveauLivreTitre.value}`)
         .then(response => response.json())
         .catch(error => console.log(error));
-    //listeLivresDisponibles.insertAdjacentElement("beforeend", creerElementLivre(nouveauLivreTitre));
     nouveauLivreTitre.value = "";
 }
 ajouterLivre.addEventListener("click", ajouterUnLivre);
