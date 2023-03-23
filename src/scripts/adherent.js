@@ -16,7 +16,6 @@ async function ajouterUnAdherent(){
     fetch(`php/Controller/ControllerAdherent.php?action=create&nom=${nomAdherent.value}`)
         .then(response => response.json())
         .catch(error => console.log(error));
-   // listeAdherents.insertAdjacentElement("beforeend", creerElementLivre(nomAdherent))
     nomAdherent.value = "";
 }
 ajouterAdherent.addEventListener("click", ajouterUnAdherent);
