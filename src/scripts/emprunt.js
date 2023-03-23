@@ -56,9 +56,9 @@ async function emprunterUnLivre(event) {
         reponse = prompt("Veuillez entrer un nom d'adhérent valide.");
     }
     if (reponse != null) {
-        fetch(`php/Controller/ControllerEmprunt.php?action=create&idAdherent=${reponse}&idLivre=${elementClique.value}`)
-            .then(response => response.json())
-            .catch(error => console.log(error));
+        let req = new XMLHttpRequest();
+        req.open('GET', `php/Controller/ControllerEmprunt.php?action=create&idAdherent=${reponse}&idLivre=${elementClique.value}`, false);
+        req.send();
         alert(elementClique.title + " emprunté.");
     }
 }
@@ -66,7 +66,7 @@ async function emprunterUnLivre(event) {
 /**
  * Ecouteur d'événement sur les livres disponibles.
  */
-livresDisponibles.addEventListener("click", function (event) {
+livresDisponibles.addEventListener("click", (event) => {
     emprunterUnLivre(event);
 });
 
@@ -78,9 +78,9 @@ livresEmpruntes.addEventListener("click", (event) => {
     let elementClique = event.target;
     let reponse = confirm("Voulez-vous vraiment rendre " + elementClique.title + " ?");
     if (reponse) {
-        fetch(`php/Controller/ControllerEmprunt.php?action=delete&idLivre=${elementClique.value}`)
-            .then(response => response.json())
-            .catch(error => console.log(error));
+        let req = new XMLHttpRequest();
+        req.open('GET', `php/Controller/ControllerEmprunt.php?action=delete&idLivre=${elementClique.value}`, false);
+        req.send();
         alert(elementClique.title + " rendu.");
     }
 });
