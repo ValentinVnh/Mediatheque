@@ -19,8 +19,8 @@ class ControlleurEmprunt
     static function create()
     {
         $emprunt = [
-            "idAdherent" => $_POST["idAdherent"],
-            "idLivre" => $_POST["idLivre"]
+            "idAdherent" => $_GET["idAdherent"],
+            "idLivre" => $_GET["idLivre"]
         ];
         ModelEmprunt::save($emprunt);
     }

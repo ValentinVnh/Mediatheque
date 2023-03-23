@@ -42,13 +42,31 @@ function creerElementLivre(livre) {
 }
 
 /**
- * Emprunte un emprunt dans la base de données à partir d'un livre et d'un adhérent
- * @param idAdherent l'identifiant de l'adhérent
- * @param idLivre l'identifiant du livre
+ * Emprunte le livre clické par l'utilisateur.
+ * @param event
+ * @returns {Promise<void>}
  */
-function emprunter(idAdherent, idLivre) {
-    fetch(`php/Controller/ControllerEmprunt.php?action=create&idAdherent=${idAdherent}&idLivre=${idLivre}`)
-        .then(response => response.json())
-        .then(response => console.log("Livre emprunté. " + response))
-        .catch(error => console.log(error));
+async function emprunterUnLivre(event) {
+    let elementClique = event.target;
+    let reponse = prompt("Veuillez entrer votre nom d'adhérent qui empruntera\" " + elementClique.title + " \"");
+    let req = await fetch(`php/Controller/ControllerAdherent.php?action=readAll`);
+    let data = await req.json();
+    let adherents = data.map(adherent => adherent.idAdherent);
+
+
+    while (!adherents.includes(reponse)) {
+        reponse = prompt("Veuillez entrer un nom d'adhérent valide.");
+    }
+
+    if (reponse != null) {
+        fetch(`php/Controller/ControllerEmprunt.php?action=create&idAdherent=${reponse}&idLivre=${elementClique.value}`)
+            .then(response => response.json())
+            .catch(error => console.log(error));
+        alert(elementClique.title + " emprunté.");
+    }
 }
+
+livresDisponibles.addEventListener("click", function (event) {
+    emprunterUnLivre(event)
+});
+
