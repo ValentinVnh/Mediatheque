@@ -61,17 +61,19 @@ function afficher(elements, container) {
  */
 function creerElement(id, nom) {
     let nouvelElement = document.createElement("li");
-    nouvelElement.innerText = id + " — " + nom;
+    let image = document.createElement("img");
+    image.src = "img/x.svg";
+    nouvelElement.innerHTML = id + " — " + nom + " " + image.outerHTML;
     nouvelElement.value = id;
     nouvelElement.title = nom;
     return nouvelElement;
 }
 
+/**
+ * Action lors du chargement de la page
+ */
 window.addEventListener("load", () => {
     afficher(recupererAdherents(), listeAdherents);
     afficher(recupererLivresDisponibles(), listeLivresDisponibles);
     afficher(recupererLivresEmpruntes(), livresEmpruntes);
-    //recupererAdherents();
-    //recupererLivresEmpruntes();
-    //recupererLivresDisponibles();
 });
