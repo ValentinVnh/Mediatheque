@@ -7,7 +7,7 @@ async function recupererLivresDisponibles() {
         });
         for (const element of tabReq) {
             let data = await element;
-            listeLivresDisponibles.insertAdjacentElement("beforeend", creerElement(data.idLivre + " - " + data.titreLivre));
+            listeLivresDisponibles.insertAdjacentElement("beforeend", creerElement(data.idLivre, data.titreLivre));
         }
     } catch (error) {
         console.log(error);
@@ -23,7 +23,7 @@ async function recupererLivresEmpruntes() {
         });
         for (const element of tabReq) {
             let data = await element;
-            livresEmpruntes.insertAdjacentElement("beforeend", creerElement(data.idLivre + " - " + data.titreLivre));
+            livresEmpruntes.insertAdjacentElement("beforeend", creerElement(data.idLivre, data.titreLivre));
         }
     } catch (error) {
         console.log(error);
@@ -44,17 +44,27 @@ async function recupererAdherents() {
         });
         for (const element of tabReq) {
             let data = await element;
-            listeAdherents.insertAdjacentElement("beforeend", creerElement(data.idAdherent + " - " + data.nomAdherent));
+            listeAdherents.insertAdjacentElement("beforeend", creerElement(data.idAdherent, data.nomAdherent));
         }
     } catch (error) {
         console.log(error);
     }
 }
 
-function creerElement(element) {
-    let nouveauAdherent = document.createElement("li");
-    nouveauAdherent.innerText = element;
-    return nouveauAdherent;
+/**
+ * À partir d'un id et d'un nom, créée un élément HTML.
+ * <p>
+ *     L'id est <code>inscrit</code> dans la value de la balise. Le nom est inscrit dans le <code>title</code>.
+ * @param id
+ * @param nom
+ * @returns {HTMLLIElement}
+ */
+function creerElement(id, nom) {
+    let nouvelElement = document.createElement("li");
+    nouvelElement.innerText = id + " — " + nom;
+    nouvelElement.value = id;
+    nouvelElement.title = nom;
+    return nouvelElement;
 }
 
 window.addEventListener("load", () => {
