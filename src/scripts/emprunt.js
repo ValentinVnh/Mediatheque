@@ -43,7 +43,7 @@ function creerElementLivre(livre) {
 
 /**
  * Emprunte le livre clické par l'utilisateur.
- * @param {event} event
+ * @param event
  * @returns {Promise<void>}
  */
 async function emprunterUnLivre(event) {
@@ -52,8 +52,8 @@ async function emprunterUnLivre(event) {
     let req = await fetch(`php/Controller/ControllerAdherent.php?action=readAll`);
     let data = await req.json();
     let adherents = data.map(adherent => adherent.idAdherent);
-    while (!adherents.includes(reponse)) {
-        reponse = prompt("Veuillez entrer un nom d'adhérent valide."); //TODO : Boucle infinie si l'utilisateur entre un nom d'adhérent inexistant.
+    while (!adherents.includes(reponse) && reponse != null) {
+        reponse = prompt("Veuillez entrer un nom d'adhérent valide.");
     }
     if (reponse != null) {
         fetch(`php/Controller/ControllerEmprunt.php?action=create&idAdherent=${reponse}&idLivre=${elementClique.value}`)
