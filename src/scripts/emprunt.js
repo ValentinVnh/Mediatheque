@@ -43,7 +43,7 @@ function creerElementLivre(livre) {
 
 /**
  * Emprunte le livre clické par l'utilisateur.
- * @param event
+ * @param {event} event
  * @returns {Promise<void>}
  */
 async function emprunterUnLivre(event) {
@@ -52,12 +52,9 @@ async function emprunterUnLivre(event) {
     let req = await fetch(`php/Controller/ControllerAdherent.php?action=readAll`);
     let data = await req.json();
     let adherents = data.map(adherent => adherent.idAdherent);
-
-
     while (!adherents.includes(reponse)) {
-        reponse = prompt("Veuillez entrer un nom d'adhérent valide.");
+        reponse = prompt("Veuillez entrer un nom d'adhérent valide."); //TODO : Boucle infinie si l'utilisateur entre un nom d'adhérent inexistant.
     }
-
     if (reponse != null) {
         fetch(`php/Controller/ControllerEmprunt.php?action=create&idAdherent=${reponse}&idLivre=${elementClique.value}`)
             .then(response => response.json())
@@ -66,7 +63,24 @@ async function emprunterUnLivre(event) {
     }
 }
 
+/**
+ * Ecouteur d'événement sur les livres disponibles.
+ */
 livresDisponibles.addEventListener("click", function (event) {
-    emprunterUnLivre(event)
+    emprunterUnLivre(event);
 });
 
+
+/**
+ * Ecouteur pour rendre le livre clické par l'utilisateur.
+ */
+livresEmpruntes.addEventListener("click", (event) => {
+    let elementClique = event.target;
+    let reponse = confirm("Voulez-vous vraiment rendre " + elementClique.title + " ?");
+    if (reponse) {
+        fetch(`php/Controller/ControllerEmprunt.php?action=delete&idLivre=${elementClique.value}`)
+            .then(response => response.json())
+            .catch(error => console.log(error));
+        alert(elementClique.title + " rendu.");
+    }
+});
