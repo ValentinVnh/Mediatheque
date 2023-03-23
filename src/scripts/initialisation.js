@@ -2,13 +2,9 @@ async function recupererLivresDisponibles() {
     try {
         let req = await fetch(`php/Controller/ControllerLivre.php?action=readAllDisponibles`);
         let data = await req.json();
-        const tabReq = data.map(async function (element) {
+        afficher(data.map(async function (element) {
             return new Livre(element.idLivre, element.titreLivre);
-        });
-        for (const element of tabReq) {
-            let data = await element;
-            listeLivresDisponibles.insertAdjacentElement("beforeend", creerElement(data.idLivre, data.titreLivre));
-        }
+        }), listeLivresDisponibles);
     } catch (error) {
         console.log(error);
     }
@@ -18,13 +14,9 @@ async function recupererLivresEmpruntes() {
     try {
         let req = await fetch(`php/Controller/ControllerLivre.php?action=readAllEmpruntes`);
         let data = await req.json();
-        const tabReq = data.map(async function (element) {
+        afficher(tabReq = data.map(async function (element) {
             return new Livre(element.idLivre, element.titreLivre);
-        });
-        for (const element of tabReq) {
-            let data = await element;
-            livresEmpruntes.insertAdjacentElement("beforeend", creerElement(data.idLivre, data.titreLivre));
-        }
+        }), livresEmpruntes);
     } catch (error) {
         console.log(error);
     }
@@ -32,19 +24,31 @@ async function recupererLivresEmpruntes() {
 
 /**
  * Récupère tous les adhérents depuis la base de données
- * Ajout dans l'interface lors du chargement de la page
- * @returns {Promise<void>}
+ * @returns {Array} liste des adhérents
  */
 async function recupererAdherents() {
     try {
         let req = await fetch(`php/Controller/ControllerAdherent.php?action=readAll`);
         let data = await req.json();
-        const tabReq = data.map(async function (element) {
+        afficher(data.map(async function (element) {
             return new Adherent(element.idAdherent, element.nomAdherent);
-        });
-        for (const element of tabReq) {
+        }), listeAdherents);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/**
+ * Ajoute des éléments HTML un container à partir d'un tableau
+ * @param {Array} elements
+ * @param {HTMLLIElement} container
+ * @returns {Promise<void>}
+ */
+async function afficher(elements, container) {
+    try {
+        for (let element of elements) {
             let data = await element;
-            listeAdherents.insertAdjacentElement("beforeend", creerElement(data.idAdherent, data.nomAdherent));
+            container.insertAdjacentElement("beforeend", creerElement(data.id, data.nom));
         }
     } catch (error) {
         console.log(error);
@@ -68,6 +72,7 @@ function creerElement(id, nom) {
 }
 
 window.addEventListener("load", () => {
+    //afficher(recupererAdherents(), listeAdherents);
     recupererAdherents();
     recupererLivresEmpruntes();
     recupererLivresDisponibles();
