@@ -1,7 +1,7 @@
 class Adherent{
     constructor(idAdherent, nomAdherent) {
-        this.idAdherent = idAdherent;
-        this.nomAdherent = nomAdherent;
+        this.id = idAdherent;
+        this.nom = nomAdherent;
     }
 }
 

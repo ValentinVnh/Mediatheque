@@ -1,7 +1,7 @@
 class Livre {
     constructor(idLivre, titreLivre) {
-        this.idLivre = idLivre;
-        this.titreLivre = titreLivre;
+        this.id = idLivre;
+        this.nom = titreLivre;
     }
 }
 

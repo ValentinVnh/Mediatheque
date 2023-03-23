@@ -1,7 +1,7 @@
 class Emprunt {
     constructor(idAdherent, idLivre) {
-        this.idAdherent = idAdherent;
-        this.idLivre = idLivre;
+        this.id = idAdherent;
+        this.nom = idLivre;
     }
 }
 
