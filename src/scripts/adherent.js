@@ -18,14 +18,16 @@ function afficherAdherents() {
                 emprunts.innerHTML = element.nombreEmprunts === "0" ? "" : " (" + element.nombreEmprunts + " " + (element.nombreEmprunts > 1 ? "emprunts" : "emprunt") + book.outerHTML + ")";
 
                 let intitule = document.createElement("div");
-
                 intitule.innerHTML = element.idAdherent + " — " + element.nomAdherent + " " + emprunts.innerHTML;
+                intitule.addEventListener("click", () => {
+                    afficherEmpruntsAdherent(element.idAdherent, element.nomAdherent);
+                });
 
                 let actions = document.createElement("div");
                 let supprimer = document.createElement("img");
                 supprimer.src = "img/x.svg";
                 supprimer.addEventListener("click", () => {
-                    supprimerAdherent(element.idAdherent);
+                    supprimerAdherent(element.idAdherent, element.nomAdherent);
                 });
 
                 actions.appendChild(supprimer);
@@ -70,4 +72,20 @@ document.getElementById("ajouterAdherent").addEventListener("click", () => {
             console.error(error)
         });
 });
+
+function afficherEmpruntsAdherent(id, nom) {
+    fetch("php/Controller/ControllerEmprunt.php?action=readAllFromAdherent&idAdherent=" + id)
+        .then(response => response.json())
+        .then(data => {
+            let emprunts = "";
+            for (let element of data) {
+                emprunts += "• " + element.idLivre + " (" + element.titreLivre + ")\n";
+            }
+            alert("Emprunts de " + nom + " :\n" + emprunts);
+        })
+        .catch((error) => {
+            alert("Erreur lors de l'affichage des emprunts de l'adhérent");
+            console.error(error);
+        });
+}
 

@@ -30,4 +30,11 @@ class ControlleurEmprunt
         $idLivre = $_GET["idLivre"];
         ModelEmprunt::delete($idLivre);
     }
+
+    static function readAllFromAdherent()
+    {
+        $idAdherent = $_GET["idAdherent"];
+        $emprunts = ModelEmprunt::selectAllFromAdherent($idAdherent);
+        echo json_encode($emprunts);
+    }
 }
