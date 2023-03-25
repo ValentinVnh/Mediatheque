@@ -3,11 +3,19 @@ class Livre {
         this.id = idLivre;
         this.nom = titreLivre;
     }
-}
 
-const nouveauLivreTitre = document.getElementById("titreLivre");
-const ajouterLivre = document.getElementById("ajouterLivre");
-const listeLivresDisponibles = document.getElementById("listeLivresDisponibles");
+    static async recupererLivres() {
+        try {
+            let req = await fetch(`${ROOT_URL}ControllerLivre.php?action=readAllDisponibles`);
+            let data = await req.json();
+            return data.map(function (element) {
+                return new Livre(element.idLivre, element.titreLivre);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
 
 /**
  * Ajoute un nouveau livre dans la base de données
@@ -19,14 +27,3 @@ function ajouterUnLivre() {
     nouveauLivreTitre.value = "";
 }
 ajouterLivre.addEventListener("click", ajouterUnLivre);
-
-/**
- * Crée un livre sous format HTML.
- * @param {Livre} livre
- * @returns Un livre format HTML
- */
-function creerElementLivre(livre) {
-    let nouveauLivre = document.createElement("li");
-    nouveauLivre.innerText = livre.value;
-    return nouveauLivre;
-}

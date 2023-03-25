@@ -5,10 +5,6 @@ class Adherent{
     }
 }
 
-const nomAdherent = document.getElementById('nomAdherent');
-const ajouterAdherent = document.getElementById('ajouterAdherent');
-const listeAdherents = document.getElementById('listeAdherents');
-
 /**
  * Ajoute un nouvel adherent dans la base de données
  */
@@ -21,12 +17,16 @@ async function ajouterUnAdherent(){
 ajouterAdherent.addEventListener("click", ajouterUnAdherent);
 
 /**
- * Crée un adherent sous format HTML.
- * @param {adherent} adherent
- * @returns Un adherent format HTML
+ * Récupère tous les adhérents depuis la base de données
  */
-function creerElementLivre(adherent) {
-    let nouveauAdherent = document.createElement("li");
-    nouveauAdherent.innerText = adherent.value;
-    return nouveauAdherent;
+async function recupererAdherents() {
+    try {
+        let req = await fetch(`php/Controller/ControllerAdherent.php?action=readAll`);
+        let data = await req.json();
+        return data.map(function (element) {
+            return new Adherent(element.idAdherent, element.nomAdherent);
+        });
+    } catch (error) {
+        console.log(error);
+    }
 }
