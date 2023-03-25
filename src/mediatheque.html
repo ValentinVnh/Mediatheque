@@ -5,11 +5,9 @@
 	<title>médiathèque JS</title>
 	<link rel="icon" href="img/book.ico" />
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
-	<script defer="defer" rel="script" type="text/javascript" src="scripts/livre.js"></script>
+	<script defer="defer" rel="script" type="text/javascript" src="scripts/disponibles.js"></script>
 	<script defer="defer" rel="script" type="text/javascript" src="scripts/adherent.js"></script>
-	<script defer="defer" rel="script" type="text/javascript" src="scripts/emprunt.js"></script>
-	<script defer="defer" rel="script" type="text/javascript" src="scripts/affichage.js"></script>
-
+	<script defer="defer" rel="script" type="text/javascript" src="scripts/empruntes.js"></script>
 </head>
 <body>
 	<h2>Médiathèque JavaScript</h2>
@@ -17,14 +15,14 @@
 		<div id="ajoutAdherent">
 			<fieldset>
 				<legend>nouvel adhérent</legend>
-				<input type="text" id="nomAdherent" placeholder="nom...">
+				<input type="text" id="nomAdherent" placeholder="nom..." required>
 				<input type="button" id="ajouterAdherent" value="ajouter">
 			</fieldset>
 		</div>
 		<div id="ajoutLivre">
 			<fieldset>
 				<legend>nouveau livre</legend>
-				<input type="text" id="titreLivre" placeholder="titre...">
+				<input type="text" id="titreLivre" placeholder="titre..." required>
 				<input type="button" id="ajouterLivre" value="ajouter">
 			</fieldset>
 		</div>

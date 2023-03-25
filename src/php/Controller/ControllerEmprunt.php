@@ -30,13 +30,4 @@ class ControlleurEmprunt
         $idLivre = $_GET["idLivre"];
         ModelEmprunt::delete($idLivre);
     }
-
-    static function read()
-    {
-        if (isset($_GET["idAdherent"])) {
-            $idAdherent = $_GET["idAdherent"];
-            $emprunts = ModelEmprunt::selectNombreEmprunts($idAdherent);
-            echo json_encode($emprunts);
-        }
-    }
 }

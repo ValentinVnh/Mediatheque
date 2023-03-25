@@ -14,7 +14,7 @@ class ModelLivre extends Model
         try {
             $pdo = self::$pdo;
             $class_name = 'ModelLivre';
-            $sql = "SELECT * from livresNonEmpruntes";
+            $sql = "SELECT * from livresDisponibles";
             $rep = $pdo->query($sql);
             $rep->setFetchMode(PDO::FETCH_CLASS, $class_name);
             return $rep->fetchAll();
