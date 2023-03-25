@@ -4,8 +4,6 @@ const nomAdherent = document.getElementById('nomAdherent');
 const ajouterAdherent = document.getElementById('ajouterAdherent');
 const listeAdherents = document.getElementById('listeAdherents');
 
-const livresDisponibles = document.getElementById("listeLivresDisponibles");
-const livresEmpruntes = document.getElementById("listeLivresEmpruntes");
 const nouveauLivreTitre = document.getElementById("titreLivre");
 const ajouterLivre = document.getElementById("ajouterLivre");
 const listeLivresDisponibles = document.getElementById("listeLivresDisponibles");

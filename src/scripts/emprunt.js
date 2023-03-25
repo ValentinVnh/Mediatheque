@@ -17,6 +17,7 @@ class Emprunt {
     }
 }
 
+const livresDisponibles = document.getElementById("listeLivresDisponibles");
 /**
  * Ecouteur d'événement sur les livres disponibles.
  */
@@ -46,7 +47,7 @@ async function emprunterUnLivre(event) {
     }
 }
 
-
+const livresEmpruntes = document.getElementById("listeLivresEmpruntes");
 /**
  * Ecouteur pour rendre le livre clické par l'utilisateur.
  */
