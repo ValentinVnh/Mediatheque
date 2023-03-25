@@ -20,8 +20,14 @@ function afficherDisponibles() {
 
                     let actions = document.createElement("div");
 
+                    let information = document.createElement("img");
+                    information.src = "img/image.svg";
+
                     let couverture = document.createElement("img");
-                    couverture.src = "img/image.svg";
+
+                    information.addEventListener("click", () => {
+                        afficherCouvertureLivre(element.titreLivre, couverture);
+                    });
 
                     let supprimer = document.createElement("img");
                     supprimer.src = "img/x.svg";
@@ -30,6 +36,7 @@ function afficherDisponibles() {
                     });
 
                     actions.appendChild(couverture);
+                    actions.appendChild(information);
                     actions.appendChild(supprimer);
 
                     li.appendChild(intitule);
@@ -40,7 +47,10 @@ function afficherDisponibles() {
                 disponibles.appendChild(unordredList);
             });
     } catch (e) {
-        alert("Erreur lors de l'affichage des livres disponibles")
+        Swal.fire({
+            title: "Erreur",
+            text: "Une erreur est survenue lors de la récupération des livres disponibles.",
+        });
         console.error(e);
     }
 }
@@ -54,33 +64,54 @@ document.getElementById("ajouterLivre").addEventListener("click", () => {
             document.getElementById("titreLivre").value = "";
         })
         .catch(e => {
-            alert("Erreur lors de l'ajout du livre")
+            Swal.fire({
+                title: "Erreur",
+                text: "Une erreur est survenue lors de l'ajout du livre.",
+            });
             console.error(e)
         });
 });
 
-function emprunterLeLivre(id, titre) {
-    let reponse = prompt("Veuillez entrer le nom de l'adhérent qui emprunte le livre \"" + titre + "\" .");
-    fetch("php/Controller/ControllerAdherent.php?action=readAll")
-        .then(data => data.json())
-        .then((data) => data.some((adherent) => adherent.idAdherent === reponse))
-        .then((result) => {
-            if (!result) {
-                alert("L'adhérent n'existe pas.");
-            } else if (reponse != null) {
-                fetch("php/Controller/ControllerEmprunt.php?action=create&idLivre=" + id + "&idAdherent=" + reponse)
-                    .then(() => {
-                        afficherEmpruntes();
-                        afficherDisponibles();
-                        afficherAdherents();
-                        alert("Le livre a été emprunté.");
-                    })
-                    .catch(e => {
-                        alert("Une erreur est survenue lors de l'emprunt du livre.");
-                        console.error(e);
+async function emprunterLeLivre(id, titre) {
+    const {value: reponse} = await Swal.fire({
+        title: "Emprunter le livre",
+        text: "Veuillez entrer le nom de l'adhérent qui emprunte le livre \"" + titre + "\" .",
+        input: "text",
+        showCancelButton: true,
+        confirmButtonText: "Emprunter",
+        cancelButtonText: "Annuler",
+    });
+    if (reponse) {
+        fetch("php/Controller/ControllerAdherent.php?action=readAll")
+            .then(data => data.json())
+            .then((data) => data.some((adherent) => adherent.idAdherent === reponse))
+            .then((result) => {
+                if (!result) {
+                    Swal.fire({
+                        title: "Erreur",
+                        text: "L'adhérent n'existe pas.",
                     });
-            }
-        });
+                } else if (reponse != null) {
+                    fetch("php/Controller/ControllerEmprunt.php?action=create&idLivre=" + id + "&idAdherent=" + reponse)
+                        .then(() => {
+                            afficherEmpruntes();
+                            afficherDisponibles();
+                            afficherAdherents();
+                            Swal.fire({
+                                title: "Emprunt",
+                                text: "Le livre a été emprunté.",
+                            });
+                        })
+                        .catch(e => {
+                            Swal.fire({
+                                title: "Erreur",
+                                text: "Une erreur est survenue lors de l'emprunt du livre.",
+                            });
+                            console.error(e);
+                        });
+                }
+            });
+    }
 }
 
 function supprimerLeLivre(id) {
@@ -88,13 +119,22 @@ function supprimerLeLivre(id) {
         fetch("php/Controller/ControllerLivre.php?action=delete&id=" + id)
             .then(() => {
                 afficherDisponibles();
-                alert("Le livre a été supprimé.");
+                Swal.fire({
+                    title: "Suppression",
+                    text: "Le livre a été supprimé.",
+                });
             })
             .catch(e => {
-                alert("Une erreur est survenue lors de la suppression du livre.");
+                Swal.fire({
+                    title: "Erreur",
+                    text: "Une erreur est survenue lors de la suppression du livre.",
+                });
                 console.error(e);
             });
     } else {
-        alert("Le livre n'a pas été supprimé.");
+        Swal.fire({
+            title: "Annulation",
+            text: "Le livre n'a pas été supprimé.",
+        });
     }
 }

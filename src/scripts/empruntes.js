@@ -4,56 +4,91 @@ function afficherEmpruntes() {
     fetch("php/Controller/ControllerLivre.php?action=readAllEmpruntes")
         .then(response => response.json())
         .then(data => {
-            let empruntes = document.getElementById("listeLivresEmpruntes");
-            empruntes.innerHTML = "";
-            let unordredList = document.createElement("ul");
+                let empruntes = document.getElementById("listeLivresEmpruntes");
+                empruntes.innerHTML = "";
+                let unordredList = document.createElement("ul");
 
-            for (let element of data) {
-                let li = document.createElement("li");
+                for (let element of data) {
+                    let li = document.createElement("li");
 
-                let actions = document.createElement("div");
+                    let actions = document.createElement("div");
 
-                let adherent = document.createElement("img");
-                adherent.src = "img/person.svg";
+                    let adherent = document.createElement("img");
+                    adherent.addEventListener("click", () => {
+                        Swal.fire({
+                            title: "Adhérent",
+                            text: element.idAdherent,
+                            icon: "info",
+                            confirmButtonText: "OK"
+                        });
+                    });
+                    adherent.src = "img/person.svg";
 
-                let couverture = document.createElement("img");
-                couverture.src = "img/image.svg";
+                    let information = document.createElement("img");
+                    information.src = "img/image.svg";
 
-                let rendre = document.createElement("img");
-                rendre.src = "img/x.svg";
-                rendre.addEventListener("click", () => {
-                    rendreLeLivre(element.idLivre);
-                });
+                    let couverture = document.createElement("img");
 
-                actions.appendChild(adherent);
-                actions.appendChild(couverture);
-                actions.appendChild(rendre);
+                    information.addEventListener("click", () => {
+                        afficherCouvertureLivre(element.titreLivre, couverture);
+                    });
 
-                li.innerHTML = element.idAdherent + " — " + element.titreLivre;
-                li.appendChild(actions);
+                    let rendre = document.createElement("img");
+                    rendre.src = "img/x.svg";
+                    rendre.addEventListener("click", () => {
+                        rendreLeLivre(element.idLivre);
+                    });
 
-                unordredList.appendChild(li);
+                    actions.appendChild(adherent);
+                    actions.appendChild(information);
+                    actions.appendChild(couverture);
+                    actions.appendChild(rendre);
+
+                    li.innerHTML = element.idAdherent + " — " + element.titreLivre;
+                    li.appendChild(actions);
+
+                    unordredList.appendChild(li);
+                }
+
+                empruntes.appendChild(unordredList);
             }
-
-            empruntes.appendChild(unordredList);
-        })
+        )
         .catch(e => {
-            alert("Une erreur est survenue lors de la récupération des livres empruntés.");
+            Swal.fire({
+                title: "Erreur",
+                text: "Une erreur est survenue lors de la récupération des livres empruntés.",
+            });
             console.error(e);
         });
 }
 
-function rendreLeLivre(id) {
-    if (confirm("Voulez-vous vraiment rendre ce livre ?")) {
+async function rendreLeLivre(id) {
+    const {value: validation} = await Swal.fire({
+        title: "Rendre le livre",
+        text: "Voulez-vous vraiment rendre ce livre ?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Supprimer",
+        cancelButtonText: "Annuler",
+    });
+
+
+    if (validation) {
         fetch("php/Controller/ControllerEmprunt.php?action=delete&idLivre=" + id)
             .then(() => {
                 afficherEmpruntes();
                 afficherDisponibles();
                 afficherAdherents();
-                alert("Le livre a été rendu.");
+                Swal.fire({
+                    title: "Rendu",
+                    text: "Le livre a été rendu.",
+                });
             })
             .catch(e => {
-                alert("Une erreur est survenue lors de la restitution du livre.");
+                Swal.fire({
+                    title: "Erreur",
+                    text: "Une erreur est survenue lors de la restitution du livre.",
+                });
                 console.error(e);
             });
     }

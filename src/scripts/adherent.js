@@ -40,22 +40,40 @@ function afficherAdherents() {
             adherents.appendChild(unordredList);
         })
         .catch((error) => {
-            alert("Erreur lors de l'affichage des adhérents")
+            Swal.fire({
+                title: "Erreur",
+                text: "Une erreur est survenue lors de la récupération des adhérents.",
+            });
             console.error(error)
         });
 }
 
-function supprimerAdherent(id) {
-    if (confirm("Voulez-vous vraiment supprimer cet adhérent ?")) {
+async function supprimerAdherent(id) {
+    const {value: validation} = await Swal.fire({
+        title: "Supprimer l'adhérent",
+        text: "Êtes-vous sûr de vouloir supprimer cet adhérent ?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Supprimer",
+        cancelButtonText: "Annuler",
+    });
+
+    if (validation) {
         fetch("php/Controller/ControllerAdherent.php?action=delete&id=" + id)
             .then(() => {
                 afficherAdherents();
                 afficherEmpruntes();
                 afficherDisponibles();
-                alert("Adhérent supprimé");
+                Swal.fire({
+                    title: "Adhérent supprimé",
+                    text: "L'adhérent a bien été supprimé.",
+                });
             })
             .catch((error) => {
-                alert("Erreur lors de la suppression de l'adhérent")
+                Swal.fire({
+                    title: "Erreur",
+                    text: "Une erreur est survenue lors de la suppression de l'adhérent.",
+                });
                 console.error(error)
             });
     }
@@ -68,7 +86,10 @@ document.getElementById("ajouterAdherent").addEventListener("click", () => {
             afficherAdherents();
         })
         .catch((error) => {
-            alert("Erreur lors de l'ajout de l'adhérent")
+            Swal.fire({
+                title: "Erreur",
+                text: "Une erreur est survenue lors de l'ajout de l'adhérent.",
+            });
             console.error(error)
         });
 });
@@ -79,12 +100,20 @@ function afficherEmpruntsAdherent(id, nom) {
         .then(data => {
             let emprunts = "";
             for (let element of data) {
-                emprunts += "• " + element.idLivre + " (" + element.titreLivre + ")\n";
+                emprunts += "• " + element.idLivre + " (" + element.titreLivre + ")<br>";
             }
-            alert("Emprunts de " + nom + " :\n" + emprunts);
+            Swal.fire({
+                title: "Emprunts de " + nom,
+                html: emprunts,
+                icon: "info",
+                confirmButtonText: "Fermer"
+            });
         })
         .catch((error) => {
-            alert("Erreur lors de l'affichage des emprunts de l'adhérent");
+            Swal.fire({
+                title: "Erreur",
+                text: "Une erreur est survenue lors de l'affichage des emprunts de l'adhérent.",
+            });
             console.error(error);
         });
 }
