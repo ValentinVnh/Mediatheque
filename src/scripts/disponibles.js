@@ -61,21 +61,26 @@ document.getElementById("ajouterLivre").addEventListener("click", () => {
 
 function emprunterLeLivre(id, titre) {
     let reponse = prompt("Veuillez entrer le nom de l'adhérent qui emprunte le livre \"" + titre + "\" .");
-    if (reponse != null) {
-        fetch("php/Controller/ControllerEmprunt.php?action=create&idLivre=" + id + "&idAdherent=" + reponse)
-            .then((data) => data.json())
-            .then((data) => {
-                if (data.status === "success") {
-                    afficherDisponibles();
-                    afficherEmpruntes();
-                    alert("Le livre a été emprunté.");
-                }
-            })
-            .catch(e => {
-                alert("Une erreur est survenue lors de l'emprunt du livre.");
-                console.error(e);
-            });
-    }
+    fetch("php/Controller/ControllerAdherent.php?action=readAll")
+        .then(data => data.json())
+        .then((data) => data.some((adherent) => adherent.idAdherent === reponse))
+        .then((result) => {
+            if (!result) {
+                alert("L'adhérent n'existe pas.");
+            } else if (reponse != null) {
+                fetch("php/Controller/ControllerEmprunt.php?action=create&idLivre=" + id + "&idAdherent=" + reponse)
+                    .then(() => {
+                        afficherEmpruntes();
+                        afficherDisponibles();
+                        afficherAdherents();
+                        alert("Le livre a été emprunté.");
+                    })
+                    .catch(e => {
+                        alert("Une erreur est survenue lors de l'emprunt du livre.");
+                        console.error(e);
+                    });
+            }
+        });
 }
 
 function supprimerLeLivre(id) {
