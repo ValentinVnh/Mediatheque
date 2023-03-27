@@ -15,7 +15,8 @@ function afficherAdherents() {
                 book.src = "img/book.ico";
                 book.alt = "emprunts";
                 book.classList.add("livre-emprunt");
-                emprunts.innerHTML = element.nombreEmprunts === "0" ? "" : " (" + element.nombreEmprunts + " " + (element.nombreEmprunts > 1 ? "emprunts" : "emprunt") + book.outerHTML + ")";
+                console.log(element.nombreEmprunts)
+                emprunts.innerHTML = element.nombreEmprunts === 0 ? "" : " (" + element.nombreEmprunts + " " + (element.nombreEmprunts > 1 ? "emprunts" : "emprunt") + book.outerHTML + ")";
 
                 let intitule = document.createElement("div");
                 intitule.innerHTML = element.idAdherent + " — " + element.nomAdherent + " " + emprunts.innerHTML;
