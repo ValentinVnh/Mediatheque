@@ -29,7 +29,7 @@ class ModelLivre extends Model
         try {
             $pdo = self::$pdo;
             $class_name = 'ModelLivre';
-            $sql = "SELECT e.idLivre, titreLivre, idAdherent from emprunt e JOIN livre l ON l.idLivre = e.idLivre";
+            $sql = "SELECT * from empruntsNommes";
             $rep = $pdo->query($sql);
             $rep->setFetchMode(PDO::FETCH_CLASS, $class_name);
             return $rep->fetchAll();
