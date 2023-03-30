@@ -6,7 +6,15 @@ async function afficherCouvertureLivre(titreLivre, container) {
                 Swal.fire({
                     title: data.items[0].volumeInfo.title,
                     text: data.items[0].volumeInfo.authors[0],
-                    imageUrl: data.items[0].volumeInfo.imageLinks.thumbnail,
+                    imageUrl: data.items[0].volumeInfo.imageLinks.thumbnail ?? "/img/no-image.png",
+                    imageWidth: 200,
+                    confirmButtonText: 'Ok'
+                })
+            })
+            .catch(() => {
+                Swal.fire({
+                    title: titreLivre,
+                    imageUrl: "img/no-image.png",
                     imageWidth: 200,
                     confirmButtonText: 'Ok'
                 })
