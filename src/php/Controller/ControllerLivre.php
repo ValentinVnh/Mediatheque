@@ -31,7 +31,7 @@ class ControlleurLivre
     static function create()
     {
         $livre = [
-            "titreLivre" => $_GET["titre"]
+            "titreLivre" => $_POST["titre"]
         ];
         $id = ModelLivre::save($livre);
         echo json_encode($id);
