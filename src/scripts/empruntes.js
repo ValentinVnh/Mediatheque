@@ -72,7 +72,6 @@ async function rendreLeLivre(id) {
         cancelButtonText: "Annuler",
     });
 
-
     if (validation) {
         fetch("php/Controller/ControllerEmprunt.php?action=delete&idLivre=" + id)
             .then(() => {
