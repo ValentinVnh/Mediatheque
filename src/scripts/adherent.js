@@ -15,7 +15,7 @@ function afficherAdherents() {
                 book.src = "img/book.ico";
                 book.alt = "emprunts";
                 book.classList.add("livre-emprunt");
-                emprunts.innerHTML = element.nombreEmprunts === "0" ? "" : " (" + element.nombreEmprunts + " " + (element.nombreEmprunts > 1 ? "emprunts" : "emprunt") + book.outerHTML + ")";
+                emprunts.innerHTML = element.nombreEmprunts === 0 ? "" : " (" + element.nombreEmprunts + " " + (element.nombreEmprunts > 1 ? "emprunts" : "emprunt") + book.outerHTML + ")";
 
                 let intitule = document.createElement("div");
                 intitule.innerHTML = element.idAdherent + " — " + element.nomAdherent + " " + emprunts.innerHTML;
@@ -80,8 +80,12 @@ async function supprimerAdherent(id) {
 }
 
 document.getElementById("ajouterAdherent").addEventListener("click", () => {
-    let nom = document.getElementById("nomAdherent").value;
-    fetch("php/Controller/ControllerAdherent.php?action=create&nom=" + nom)
+    fetch("php/Controller/ControllerAdherent.php?action=create", {
+        method: "POST",
+        headers: {
+            "Content-Type": 'application/x-www-form-urlencoded'
+        }, body: `nom=${document.getElementById('nomAdherent').value}`
+    })
         .then(() => {
             afficherAdherents();
         })

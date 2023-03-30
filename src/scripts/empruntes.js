@@ -17,7 +17,7 @@ function afficherEmpruntes() {
                     adherent.addEventListener("click", () => {
                         Swal.fire({
                             title: "Adhérent",
-                            text: element.idAdherent,
+                            text: element.idAdherent + " - " + element.nomAdherent,
                             icon: "info",
                             confirmButtonText: "OK"
                         });
@@ -71,7 +71,6 @@ async function rendreLeLivre(id) {
         confirmButtonText: "Supprimer",
         cancelButtonText: "Annuler",
     });
-
 
     if (validation) {
         fetch("php/Controller/ControllerEmprunt.php?action=delete&idLivre=" + id)
