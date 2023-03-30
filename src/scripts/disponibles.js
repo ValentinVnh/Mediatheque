@@ -86,14 +86,14 @@ async function emprunterLeLivre(id, titre) {
     if (reponse) {
         fetch("php/Controller/ControllerAdherent.php?action=readAll")
             .then(data => data.json())
-            .then((data) => data.some((adherent) => adherent.idAdherent === reponse))
+            .then((data) => data.some((adherent) => adherent.idAdherent == reponse))
             .then((result) => {
                 if (!result) {
                     Swal.fire({
                         title: "Erreur", text: "L'adhérent n'existe pas.",
                     });
                 } else if (reponse != null) {
-                    const rep = fetch("php/Controller/ControllerEmprunt.php?action=create", {
+                    fetch("php/Controller/ControllerEmprunt.php?action=create", {
                         method: 'POST',
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                         body: `idLivre=${id}&idAdherent=${reponse}`
