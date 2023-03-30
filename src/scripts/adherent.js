@@ -88,6 +88,7 @@ document.getElementById("ajouterAdherent").addEventListener("click", () => {
     })
         .then(() => {
             afficherAdherents();
+            document.getElementById('nomAdherent').value = "";
         })
         .catch((error) => {
             Swal.fire({
