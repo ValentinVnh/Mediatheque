@@ -1,0 +1,23 @@
+Byar 50% - Vanhove 50%
+
+3 listes : adhérents / livres dispo / livres empruntés : oui (Byar - Vanhove)
+ajout adhérent : oui (Byar - Vanhove)
+ajout livre : oui (Vanhove)
+emprunter un livre : oui (Byar - Vanhove)
+retour d'un livre : oui (Byar - Vanhove)
+nombre d'emprunts d'un adhérent : oui (Byar)
+liste des livres empruntés d'un adhérent : oui (Byar)
+
+# Liste des fonctionnalités supplémentaires :
+requêtes GET & POST : oui (Byar - Vanhove)
+suppression d'un livre : oui (Byar - Vanhove)
+suppression d'un adhérent : oui (Byar - Vanhove)
+emprunteur d'un livre : oui (Byar - Vanhove)
+utilisation d'une API externe : oui (Byar - Vanhove)
+  -> Google Books nous fournit toutes les informations concernant un livre (les avis du livre, le prix, le titre, l'auteur, ...).
+  -> Nous l'avons principalement utilisé pour l'affichage de la couverture du livre et la récupération du nom de l'auteur
+utilisation de fetch avec then : oui (Byar - Vanhove)
+utilisation de fetch avec async/await : oui (utilisation par un framework. Nous ne trouvions pas de cas d'utilisation concret) (Byar - Vanhove)
+autre :
+- des vues dans la base de données pour récupérer plus facilement des informations (Byar - (Vanhove))
+- ajout du framework Swal qui permet d'afficher des alertes, prompts, confirmations (Byar - Vanhove)
